@@ -1,5 +1,5 @@
 __author__ = 'Sudheer'
-filename=""
+filename = ""
 result = ""
 image_1 = ""
 image_2 = ""
