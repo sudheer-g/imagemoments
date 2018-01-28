@@ -1,6 +1,7 @@
 __author__ = 'Sudheer'
 from Tkinter import *
 from Tkinter import Tk
+import tkMessageBox
 from tkFileDialog import askopenfilename
 
 from PIL import Image, ImageTk
@@ -12,9 +13,12 @@ import result_values_file
 def open_file_explorer():
     result_values_file.filename = askopenfilename()
     if(result_values_file.filename):
-        print "Hit"
         main_controller.zernike_moments_for_all_angles()
         image_description_window()
+    else:
+        tkMessageBox.showerror("No Image Selected", "Please select an Image")
+        raise RuntimeError, "Image not selected"
+
 
 
 def main_window():
