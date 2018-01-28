@@ -10,18 +10,14 @@ import result_values_file
 
 
 def open_file_explorer():
-    print "Hit open file explorer"
-    Tk().withdraw()
     result_values_file.filename = askopenfilename()
     if(result_values_file.filename):
         print "Hit"
         main_controller.zernike_moments_for_all_angles()
         image_description_window()
-    print "Exit open file explorer"
 
 
 def main_window():
-    print "Hit main window"
     master = Tk()
     master.title("Pokedex")
     master.minsize(500, 500)
@@ -49,12 +45,12 @@ def main_window():
     buttons_frame.pack(side=BOTTOM)
     upload_button = Button(buttons_frame, text="Upload Image", command=open_file_explorer, height=3, width=10)
     upload_button.pack()
+    close_button = Button(buttons_frame, text="Close", command=master.destroy,height=3, width=10)
+    close_button.pack()
     master.mainloop()
-    print "Exit Main window"
 
 
 def image_description_window():
-    print "Hit Image description window"
     image_window = Toplevel()
     canvas = Canvas(image_window, width=300, height=300)
     canvas.pack()
@@ -70,13 +66,12 @@ def image_description_window():
     rotate_image_button = Button(buttons_frame, text="Rotate Image",
                                  command=main_controller.print_outline_for_all_angles)
     rotate_image_button.pack()
+    close_button = Button(buttons_frame, text="Close", command=image_window.destroy, height=2, width=5)
+    close_button.pack()
     image_window.mainloop()
-    print "Exit image description window"
 
 
 
 if __name__ == "__main__":
-    print "Hit main"
     main_window()
-    print "Exit main"
     sys.exit(0)
