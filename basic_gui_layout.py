@@ -10,13 +10,18 @@ import result_values_file
 
 
 def open_file_explorer():
+    print "Hit open file explorer"
     Tk().withdraw()
     result_values_file.filename = askopenfilename()
-    main_controller.zernike_moments_for_all_angles()
-    image_description_window()
+    if(result_values_file.filename):
+        print "Hit"
+        main_controller.zernike_moments_for_all_angles()
+        image_description_window()
+    print "Exit open file explorer"
 
 
 def main_window():
+    print "Hit main window"
     master = Tk()
     master.title("Pokedex")
     master.minsize(500, 500)
@@ -45,34 +50,33 @@ def main_window():
     upload_button = Button(buttons_frame, text="Upload Image", command=open_file_explorer, height=3, width=10)
     upload_button.pack()
     master.mainloop()
+    print "Exit Main window"
 
 
 def image_description_window():
+    print "Hit Image description window"
     image_window = Toplevel()
     canvas = Canvas(image_window, width=300, height=300)
     canvas.pack()
     image = Image.open(result_values_file.filename)
     object_image = ImageTk.PhotoImage(image)
-    canvas_object1 = canvas.create_image(150, 150, image=object_image)
-    if result_values_file.result != "":
-        text_object = canvas.create_text(150, 200, text="The Object Identified is: " + result_values_file.result)
+    canvas.create_image(150, 150, image=object_image)
+    if result_values_file.result:
+        canvas.create_text(150, 200, text="The Object Identified is: " + result_values_file.result)
     else:
-        text_object = canvas.create_text(150, 200, text="Object successfully stored in Database ")
+        canvas.create_text(150, 200, text="Object successfully stored in Database ")
     buttons_frame = Frame(image_window)
     buttons_frame.pack(side=BOTTOM)
     rotate_image_button = Button(buttons_frame, text="Rotate Image",
                                  command=main_controller.print_outline_for_all_angles)
     rotate_image_button.pack()
     image_window.mainloop()
+    print "Exit image description window"
 
-
-def advanced_rotations_window():
-    advanced_window = Toplevel()
-    canvas = Canvas(advanced_window, width=400, height=400)
-    canvas.pack()
-    advanced_window.mainloop()
 
 
 if __name__ == "__main__":
+    print "Hit main"
     main_window()
+    print "Exit main"
     sys.exit(0)
